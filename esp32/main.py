@@ -22,8 +22,8 @@ compteurCouleur = 0
 #--------------------LED---------------------
 from machine import Pin
 
-led_jaune = Pin(26, Pin.OUT)
-led_jaune.value(0)
+#led_jaune = Pin(26, Pin.OUT)
+#led_jaune.value(0)
 
 from neopixel import NeoPixel
 
@@ -32,8 +32,8 @@ bandeau_led = NeoPixel(neo, 10)   # Cree une instance pour piloter 5 WS2812b
 
 vert = (0, 255, 0)
 rouge = (255,0,0) 
-bleu = (0, 0, 128)
-blanc = (127,127,127)
+bleu = (0, 0, 255)
+blanc = (32, 32, 32)
 jaune = (255,180,0)
 off = (0,0,0)
 
@@ -59,9 +59,11 @@ gache.value(0)
 
 #-------------------------------------------
 while(1):
+  bandeau_led[4] = (blanc)  # eteindre la led verte 3
+  bandeau_led.write()  # Affiche toutes les Led
   compteurLigne = 0
   compteurCouleur = 0
-  led_jaune.on()
+  #led_jaune.on()
   f = open('id-salarie.txt', 'r')
   print("-------------------------------------------")
   print("Attente BADGE...")
@@ -75,32 +77,70 @@ while(1):
 
   print("-----")
 
+  #-----| ADMIN 1 |----- 
+
   if tag==[103, 240, 200, 181, 234]:
     bandeau_led[0] = (bleu)
     bandeau_led.write()
     admin.admin1()
     time.sleep(1)
-  
+    ok=2
+
+  if tag==[4, 207, 252, 156, 171]:
+    bandeau_led[0] = (bleu)
+    bandeau_led.write()
+    admin.admin1()
+    time.sleep(1)
+    ok=2
+
+  #-----| ADMIN 2 |----- 
+
   elif tag==[39, 246, 1, 99, 179]:
     bandeau_led[1] = (bleu)
     bandeau_led.write()
     admin.admin2()
     time.sleep(1)
+    ok=2
+
+  elif tag==[103, 145, 181, 100, 39]:
+    bandeau_led[1] = (bleu)
+    bandeau_led.write()
+    admin.admin2()
+    time.sleep(1)
+    ok=2
   
+  #-----| ADMIN 3 |----- 
+
   elif tag==[231, 220, 193, 100, 158]:
     bandeau_led[2] = (bleu)
     bandeau_led.write()
     admin.admin3()
     time.sleep(1)
+    ok=2
   
+  elif tag==[59, 230, 77, 117, 229]:
+    bandeau_led[2] = (bleu)
+    bandeau_led.write()
+    admin.admin3()
+    time.sleep(1)
+    ok=2
+
+  #-----| ADMIN 4 |----- 
 
   elif tag==[2, 236, 200, 131, 165]:
     bandeau_led[3] = (bleu)
     bandeau_led.write()
     admin.admin4()
     time.sleep(1)
+    ok=2
 
-  
+  elif tag==[28, 237, 175, 33, 127]:
+    bandeau_led[3] = (bleu)
+    bandeau_led.write()
+    admin.admin4()
+    time.sleep(1)
+    ok=2
+
   else:
     for id_salarie in f.readlines():
       print("-----")
@@ -125,32 +165,31 @@ while(1):
                 ok=1
                 compteurCouleur = compteurLigne
       compteurLigne = compteurLigne +1
-      
               
   if(ok==1):
     if(compteurCouleur == 0):
-      led_jaune.off()
+      #led_jaune.off()
       buzzer.on()
       gache.on()
       bandeau_led[0] = (vert)  # allumer la led 0 verte
       bandeau_led.write()  # Affiche toutes les Led
 
     if(compteurCouleur == 1):
-      led_jaune.off()
+      #led_jaune.off()
       buzzer.on()
       gache.on()
       bandeau_led[1] = (vert)  # allumer la led 1 verte
       bandeau_led.write()  # Affiche toutes les Led
 
     if(compteurCouleur == 2):
-      led_jaune.off()
+      #led_jaune.off()
       buzzer.on()
       gache.on()
       bandeau_led[2] = (vert)  # allumer la led 2 verte
       bandeau_led.write()  # Affiche toutes les Led
 
     if(compteurCouleur == 3):
-      led_jaune.off()
+      #led_jaune.off()
       buzzer.on()
       gache.on()
       bandeau_led[3] = (vert)  # allumer la led 3 verte
@@ -162,7 +201,7 @@ while(1):
 
   if(ok==0):
     print("CARTE INCONNUE")
-    led_jaune.off()
+    #led_jaune.off()
     gache.off()
 
     bandeau_led[0] = (rouge)  # allumer la led 0 rouge
