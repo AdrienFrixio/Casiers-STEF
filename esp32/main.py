@@ -1,3 +1,11 @@
+'''
+carte_blanche_adrien = [63, 227, 52, 41, 193]
+carte_jeune_adrien = [51, 172, 74, 217, 12]
+badge_bleu_adrien = [199, 103, 218, 115, 9]
+carte_blanche_greg = [198, 148, 159, 37, 232]
+carte_jeune_greg = [121, 245, 189, 104, 89]
+carte_jeune_JP = [67, 64, 75, 217, 145]
+'''
 #--------------------RFID--------------------
 from read_TAG import do_read_une_fois
 import machine
@@ -63,6 +71,7 @@ while(1):
   
   while(tag==[0, 0, 0, 0, 0]):
     tag = do_read_une_fois()
+    time.sleep(0.5)
   print("ID Salarie: ", id_salarie)
   print("Badge lu: ", tag)
   ok=0
