@@ -6,7 +6,6 @@ import enregistre
 import admin
 import buzzer
 
-
 tag = [0, 0, 0, 0, 0]
 id_salarie = [0, 0, 0, 0, 0]
 compteurLigne = 0
